@@ -25,7 +25,6 @@ def max_2_sum arr
 end
 
 def sum_to_n? arr, n
-  # YOUR CODE HERE
   hash = Hash.new
   for num in arr
     if hash.has_value?(num)
@@ -33,14 +32,16 @@ def sum_to_n? arr, n
     else
       hash[num] = 1
     end
-
-    diff = (num - n).abs
-    if hash.has_value?(diff)
-      if ( (diff != num) || ((diff == num) && (hash[diff] > 1)) )
-        return true
-      end
+  end
+  
+  hash.each do | key, value |
+    hash[key] -= 1
+    diff = n - key
+    if ((hash.has_key?(diff)) && (hash[diff] >= 1))
+      return true
     end
   end
+  
   return false
 end
 
